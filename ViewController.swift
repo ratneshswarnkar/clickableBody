@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  HTMLDemo
 //
-//  Created by Kawalpreet Kaur on 12/6/18.
-//  Copyright © 2018 Kawalpreet Kaur. All rights reserved.
+//
+//  Created by Ratnesh Swarkar on 12/6/18.
+//  Copyright © 2018 Ratnesh Swarkar. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ class ViewController: UIViewController,WKNavigationDelegate{
         webKit.navigationDelegate = self
         
         let url = Bundle.main.url(forResource: "front-new", withExtension: "html")
-        // let url = URL(string: "http://172.10.178.41:8089/front-new.html")
+        
         let request = URLRequest(url: url!)
         webKit.allowsBackForwardNavigationGestures = true
         webKit.load(request)
@@ -61,32 +61,27 @@ class ViewController: UIViewController,WKNavigationDelegate{
         }
     }
     @IBAction func actionCheckId(_ sender: Any) {
-        self.jsDemo1()
-        // var imag:UIImage? = self.screenshot()
+        self.bodyPartId()
         
         self.screenImageView.image = self.screenshot()
         
     }
-    func jsDemo1() {
-        let firstname = "Mickey"
-        //let lastname = "Mouse"
+    //Get selected id
+    func bodyPartId() {
+        let idval = "0"
         
-        //        if let functionFullname = self.jsContext.objectForKeyedSubscript("getFullname") {
-        //            // Call the function that composes the fullname.
-        //            if let fullname = functionFullname.call(withArguments: [firstname, lastname]) {
-        //                print(fullname.toString())
-        //            }
-        //        }
         
         if let functionGetId = self.jsContext.objectForKeyedSubscript("getbodyPartId"){
             
-            if let bodyselectionId = functionGetId.call(withArguments: [firstname]){
+            if let bodyselectionId = functionGetId.call(withArguments: [idval]){
                 
                 print(bodyselectionId.toString())
             }
         }
         
     }
+    
+    //Web view delegate
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         let path = Bundle.main.path(forResource: "illustration-style", ofType: "css")!
